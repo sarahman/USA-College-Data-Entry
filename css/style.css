@@ -4,7 +4,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-    color: #334d55;
+    color: #334D55;
     font-family: Verdana, Arial, sans-serif;
     font-size: 120%;
 }
@@ -16,7 +16,7 @@ h2 {
 }
 
 h3 {
-    color: #334d55;
+    color: #334D55;
     font-family: Arial, sans-serif;
     font-size: 100%;
 }
@@ -29,7 +29,7 @@ h4 {
 }
 
 h5 {
-    color: #334d55;
+    color: #334D55;
     font-family: Verdana, Arial, sans-serif;
     font-size: 100%;
 }
@@ -45,13 +45,9 @@ body {
     width: 940px;
 }
 
-.backfinal {
-    padding-left: 5px;
-}
-
 #masthead {
     padding: 0;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #CCCCCC;
     width: 100%;
 }
 
@@ -82,7 +78,7 @@ label {
     font-family: Arial, sans-serif;
     font-size: 100%;
     font-weight: bold;
-    color: #334d55;
+    color: #334D55;
     display: block;
 }
 
@@ -90,74 +86,80 @@ label {
 /*                  Layout Divs                */
 /***********************************************/
 
-/************** .feature styles ***************/
+/************** #content styles ***************/
 
-.feature {
+#content {
     font-size: 80%;
     height: 100%;
-    padding: 10px 0 10px;
+    margin: 5px 0;
+    overflow: hidden;
 }
 
-.feature #message-success {
+#content .message-block {
+    font-size: 18px;
+    text-align: center;
+}
+
+#content .message-block p {
+    margin: 10px 0 15px ;
+}
+
+#content .message-block p.success {
     color: #1177DD;
-    font-size: 18px;
-    padding: 5px 0 10px;
-    text-align: center;
 }
 
-.feature #message-failure {
-    color: #ff0000;
-    font-size: 18px;
-    text-align: center;
+#content .message-block p.failure {
+    color: #FF0000;
 }
 
-.feature.left {
+div.left-content {
     float: left;
-    width: 470px;
+    width: 465px;
 }
 
-.feature.right {
+div.right-content {
     float: right;
-    width: 470px;
+    width: 465px;
 }
 
-.feature h3 {
+#content h3 {
     padding: 30px 0 5px 0;
     text-align: center;
 }
 
-.feature form {
-    background-color: #c6ffff;
-    padding: 5px 5px 5px 5px;
+#content form {
+    background-color: #C6FFFF;
+    padding: 5px;
     margin: 0 0 10px 0;
-    width: 450px;
 }
 
-.feature form .errorMsg {
-    color: #ff0000;
+#content form span.stars {
+    padding-left: 2px;
+}
+
+#content form span.error,
+#content form .errorMsg {
+    color: #FF0000;
     display: block;
     font-size: 12px;
 }
 
-.feature form.left {
-    float: left;
+#content form span.error {
+    text-align: center;
+    font-size: 16px;
 }
 
-.feature form.right {
-    float: right;
-}
-
-.feature form select {
+#content form select {
     width: 250px;
 }
 
-.feature form fieldset legend {
-    color: #02468a;
+#content form fieldset legend {
+    color: #02468A;
     font-size: 16px;
     font-weight: 600;
 }
 
-.feature form .submit-clear {
+#content form .submit-clear {
     margin: 0 auto;
     width: 120px;
 }
@@ -165,9 +167,9 @@ label {
 /************* Footer ***************/
 
 #siteInfo {
-    border: 1px solid #cccccc;
+    border: 1px solid #CCCCCC;
     clear: both;
-    color: #cccccc;
+    color: #CCCCCC;
     font-size: 75%;
     padding: 10px;
 }

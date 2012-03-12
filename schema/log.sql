@@ -9,3 +9,6 @@ UPDATE colleges SET `weather_rating`='Colder' WHERE `weather_rating`='colder';
 UPDATE colleges SET `weather_rating`='Mild' WHERE `weather_rating`='mild';
 UPDATE colleges SET `weather_rating`='Mild' WHERE `weather_rating`='hotter';
 UPDATE colleges SET `weather_rating`='Hottest' WHERE `weather_rating`='hottest';
+
+ALTER TABLE `colleges` CHANGE `in_state_tution_fee` `in_state_tuition_fee` FLOAT NULL DEFAULT NULL ,
+    CHANGE `out_state_tution_fee` `out_state_tuition_fee` FLOAT NULL DEFAULT NULL ;

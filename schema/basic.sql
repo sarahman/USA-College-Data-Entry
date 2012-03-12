@@ -81,18 +81,19 @@ CREATE TABLE IF NOT EXISTS `weather_ratings` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 
-ALTER TABLE `colleges`
-  ADD CONSTRAINT `colleges_ibfk_1` FOREIGN KEY (`college_type`) REFERENCES `college_types` (`college_type`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `colleges` ADD CONSTRAINT `colleges_ibfk_1` FOREIGN KEY (`college_type`)
+    REFERENCES `college_types` (`college_type`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `majors`
-  ADD CONSTRAINT `majors_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`college_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `majors` ADD CONSTRAINT `majors_ibfk_1` FOREIGN KEY (`college_id`)
+    REFERENCES `colleges` (`college_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `sports_offers`
-  ADD CONSTRAINT `sports_offers_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`college_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sports_offers_ibfk_2` FOREIGN KEY (`sport_name`) REFERENCES `sports_names` (`sport_name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sports_offers` ADD CONSTRAINT `sports_offers_ibfk_1` FOREIGN KEY (`college_id`)
+    REFERENCES `colleges` (`college_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `sports_offers_ibfk_2` FOREIGN KEY (`sport_name`)
+    REFERENCES `sports_names` (`sport_name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `student_enrollments`
-  ADD CONSTRAINT `student_enrollments_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`college_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `student_enrollments` ADD CONSTRAINT `student_enrollments_ibfk_1` FOREIGN KEY (`college_id`)
+    REFERENCES `colleges` (`college_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 SET FOREIGN_KEY_CHECKS=1;

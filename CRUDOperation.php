@@ -1,14 +1,14 @@
 <?php
 
-class CRUDOpearion
+class CRUDOperation
 {
     public static function insertCollege($db, $data)
     {
         $query = "INSERT INTO colleges (name, city, state, college_type, school_logo_link,
-            athletic_logo_link, division, weather_rating, in_state_tution_fee, out_state_tution_fee)
+            athletic_logo_link, division, weather_rating, in_state_tuition_fee, out_state_tuition_fee)
             VALUES ('{$data['name']}', '{$data['city']}', '{$data['state']}', '{$data['college_type']}',
             '{$data['school_logo_link']}', '{$data['athletic_logo_link']}', '{$data['division']}',
-            '{$data['weather_rating']}', '{$data['in_state_tution_fee']}', '{$data['out_state_tution_fee']}')";
+            '{$data['weather_rating']}', '{$data['in_state_tuition_fee']}', '{$data['out_state_tuition_fee']}')";
         $db->query($query);
     }
 
