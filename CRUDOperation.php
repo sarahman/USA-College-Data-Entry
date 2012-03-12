@@ -2,7 +2,7 @@
 
 class CRUDOperation
 {
-    public static function insertCollege($db, $data)
+    public static function insertCollege(ezSQL_mysql $db, $data)
     {
         $query = "INSERT INTO colleges (name, city, state, college_type, school_logo_link,
             athletic_logo_link, division, weather_rating, in_state_tuition_fee, out_state_tuition_fee)
@@ -12,59 +12,59 @@ class CRUDOperation
         $db->query($query);
     }
 
-    public static function insertMajor($db, $data)
+    public static function insertMajor(ezSQL_mysql $db, $data)
     {
         $query = "INSERT INTO majors (college_id, subject_name)
             VALUES ('{$data['college_id']}', '{$data['subject_name']}')";
         $db->query($query);
     }
 
-    public static function insertSportName($db, $data)
+    public static function insertSportName(ezSQL_mysql $db, $data)
     {
         $query = "INSERT INTO sports_names (sport_name)
             VALUES ('{$data['sport_name_entry']}')";
         $db->query($query);
     }
 
-    public static function insertSportOffer($db, $data)
+    public static function insertSportOffer(ezSQL_mysql $db, $data)
     {
         $query = "INSERT INTO sports_offers (college_id, sport_name)
             VALUES ('{$data['college_id3']}', '{$data['sport_name']}')";
         $db->query($query);
     }
 
-    public static function insertStudentEnrollment($db, $data)
+    public static function insertStudentEnrollment(ezSQL_mysql $db, $data)
     {
         $query = "INSERT INTO student_enrollments (college_id, semester, year, no_of_students)
             VALUES ('{$data['college_id2']}', '{$data['semester']}', '{$data['year']}', '{$data['no_of_students']}')";
         $db->query($query);
     }
 
-    public static function selectAllCollegeTypes($db)
+    public static function selectAllCollegeTypes(ezSQL_mysql $db)
     {
         $query = "SELECT * FROM college_types";
         return $db->get_results($query);
     }
 
-    public static function selectAllDivisions($db)
+    public static function selectAllDivisions(ezSQL_mysql $db)
     {
         $query = "SELECT * FROM divisions";
         return $db->get_results($query);
     }
 
-    public static function selectAllWeatherRatings($db)
+    public static function selectAllWeatherRatings(ezSQL_mysql $db)
     {
         $query = "SELECT * FROM weather_ratings";
         return $db->get_results($query);
     }
 
-    public static function selectAllSportNames($db)
+    public static function selectAllSportNames(ezSQL_mysql $db)
     {
         $query = "SELECT * FROM sports_names";
         return $db->get_results($query);
     }
 
-    public static function selectIdNameOfCollege($db)
+    public static function selectIdNameOfCollege(ezSQL_mysql $db)
     {
         $query = "SELECT college_id, name FROM colleges";
         return $db->get_results($query);

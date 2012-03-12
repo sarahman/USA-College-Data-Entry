@@ -8,6 +8,9 @@ $config['db_user'] = 'root';
 $config['db_pass'] = 'commonrbs';
 $config['db_name'] = 'schools_colleges';
 
+/**
+ * @return ezSQL_mysql
+ */
 function getConnection()
 {
     global $config;

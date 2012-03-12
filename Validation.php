@@ -2,7 +2,7 @@
 
 class Validation
 {
-    public static function validateCollegeEntryForm($db, $data)
+    public static function validateCollegeEntryForm(ezSQL_mysql $db, $data)
     {
         $msg = array();
 
@@ -62,7 +62,7 @@ class Validation
         return empty($msg) ? true : $msg;
     }
 
-    public static function validateSportNameEntryForm($db, $data)
+    public static function validateSportNameEntryForm(ezSQL_mysql $db, $data)
     {
         if (empty($data['sport_name_entry'])) {
             return array('sport_name_entry' => 'Please enter sport name.');
@@ -74,7 +74,7 @@ class Validation
         }
     }
 
-    public static function validateSportOfferEntryForm($db, $data)
+    public static function validateSportOfferEntryForm(ezSQL_mysql $db, $data)
     {
         $msg = array();
 
@@ -92,12 +92,12 @@ class Validation
                       WHERE college_id='{$data['college_id3']}'
                         AND sport_name='{$data['sport_name']}'";
             $result = $db->get_row($query);
-            empty($result) || $msg['collegeSportError'] = "<b>{$data['sport_name']}</b> is already in that college.";
+            empty($result) || $msg['collegeSportError'] = "{$data['sport_name']} is already in that college.";
         }
 
         return empty($msg) ? true : $msg;
     }
-    public static function validateMajorEntryForm($db, $data)
+    public static function validateMajorEntryForm(ezSQL_mysql $db, $data)
     {
         $msg = array();
 
@@ -115,13 +115,13 @@ class Validation
                       WHERE college_id='{$data['college_id']}'
                         AND subject_name='{$data['subject_name']}'";
             $result = $db->get_row($query);
-            empty($result) || $msg['collegeMajorError'] = "<b>{$data['subject_name']}</b> is already in that college.";
+            empty($result) || $msg['collegeMajorError'] = "{$data['subject_name']} is already in that college.";
         }
 
         return empty($msg) ? true : $msg;
     }
 
-    public static function validateStudentEnrollmentForm($db, $data)
+    public static function validateStudentEnrollmentForm(ezSQL_mysql $db, $data)
     {
         $msg = array();
 
@@ -149,7 +149,7 @@ class Validation
                         AND `year`='{$data['year']}'";
             $result = $db->get_row($query);
             empty($result) || $msg['studentEnrollmentError'] = "The no of students in the
-                    <b>{$data['semester']}-{$data['year']}</b> semester of that <strong>college</strong> is already inserted.";
+                    {$data['semester']}-{$data['year']} semester of that <strong>college</strong> is already inserted.";
         }
 
         return empty($msg) ? true : $msg;
