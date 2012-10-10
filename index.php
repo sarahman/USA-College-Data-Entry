@@ -12,45 +12,45 @@ if (!empty($_POST)) {
         if ($errorMessage === true) {
             CRUDOperation::insertCollege($db, $_POST);
             unset($_POST);
-            $successMessage = "A new college is successfully inserted.";
+            $messageData = getSuccessMessageData("A new college is successfully inserted.");
         } else {
-            $failureMessage = "An error occurred while inserting a college.";
+            $messageData = getFailureMessageData("An error occurred while inserting a college.");
         }
     } elseif ($_POST['addMajor']) {
         $errorMessage = Validation::validateMajorEntryForm($db, $_POST);
         if ($errorMessage === true) {
             CRUDOperation::insertMajor($db, $_POST);
             unset($_POST);
-            $successMessage = "A new major of a college is successfully inserted.";
+            $messageData = getSuccessMessageData("A new major of a college is successfully inserted.");
         } else {
-            $failureMessage = "An error occurred while inserting a major under a college.";
+            $messageData = getFailureMessageData("An error occurred while inserting a major under a college.");
         }
     } elseif ($_POST['addEnrollment']) {
         $errorMessage = Validation::validateStudentEnrollmentForm($db, $_POST);
         if ($errorMessage === true) {
             CRUDOperation::insertStudentEnrollment($db, $_POST);
             unset ($_POST);
-            $successMessage = "A new student enrollment of a college is successfully inserted.";
+            $messageData = getSuccessMessageData("A new student enrollment of a college is successfully inserted.");
         } else {
-            $failureMessage = "An error occurred while inserting student enrollment under a college.";
+            $messageData = getFailureMessageData("An error occurred while inserting student enrollment under a college.");
         }
     } elseif ($_POST['addSportName']) {
         $errorMessage = Validation::validateSportNameEntryForm($db, $_POST);
         if ($errorMessage === true) {
             CRUDOperation::insertSportName($db, $_POST);
             unset($_POST);
-            $successMessage = "A new sport name is successfully inserted.";
+            $messageData = getSuccessMessageData("A new sport name is successfully inserted.");
         } else {
-            $failureMessage = "An error occurred while inserting sport name.";
+            $messageData = getFailureMessageData("An error occurred while inserting sport name.");
         }
     } elseif ($_POST['addSportOffer']) {
         $errorMessage = Validation::validateSportOfferEntryForm($db, $_POST);
         if ($errorMessage === true) {
             CRUDOperation::insertSportOffer($db, $_POST);
             unset($_POST);
-            $successMessage = "A new sport is successfully in a college.";
+            $messageData = getSuccessMessageData("A new sport is successfully in a college.");
         } else {
-            $failureMessage = "An error occurred while inserting sport under a college.";
+            $messageData = getFailureMessageData("An error occurred while inserting sport under a college.");
         }
     }
 }
@@ -58,19 +58,7 @@ include_once 'header.php';
 ?>
 <div id="content">
 
-    <div class='message-block'>
-
-        <?php if (!empty($successMessage)) : ?>
-        <p class="success">
-            <?php echo $successMessage ?>
-        </p>
-        <?php elseif (!empty($failureMessage)): ?>
-        <p class="failure">
-            <?php echo $failureMessage ?>
-        </p>
-        <?php endif ?>
-
-    </div>
+    <?php echo getNotificationMessage($messageData) ?>
 
     <div class="left-content">
 
