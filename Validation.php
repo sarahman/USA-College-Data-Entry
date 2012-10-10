@@ -154,4 +154,43 @@ class Validation
 
         return empty($msg) ? true : $msg;
     }
+
+    public static function validateWeatherRatingEntryForm(ezSQL_mysql $db, $data)
+    {
+        $msg = array();
+        if (empty ($data['type'])) {
+            $msg['type'] = 'Please enter weather type';
+        } else {
+            $query = "SELECT * FROM weather_ratings where type='{$data['type']}'";
+            $result = $db->get_results($query);
+            if ($result[0]) {
+                $msg['type'] = 'This weather type is in the database.';
+            } else {
+                return true;
+            }
+        }
+        return $msg;
+    }
+
+    public static function validateCollegeTypeEntryForm(ezSQL_mysql $db, $data)
+    {
+        if(empty ($data['college_type'])) {
+            return array('college_type' => 'Please enter a college type.');
+        } else {
+            $query = "SELECT * FROM college_types where college_type='{$data['college_type']}'";
+            $result = $db->get_results($query);
+            return empty ($result[0]) ? true : array('college_type' => 'This college type is in the database.');
+        }
+    }
+
+    public static function validateDivisionEntryForm(ezSQL_mysql $db, $data)
+    {
+        if(empty ($data['division'])) {
+            return array('division' => 'Please enter a division.');
+        } else {
+            $query = "SELECT * FROM divisions where division='{$data['division']}'";
+            $result = $db->get_results($query);
+            return empty ($result[0]) ? true : array('division' => 'This division is in the database.');
+        }
+    }
 }

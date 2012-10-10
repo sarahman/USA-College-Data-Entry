@@ -74,6 +74,131 @@ body {
     color: #CCCCFF;
 }
 
+#header {
+    background: url(../image/green_bg.jpg) repeat-y;
+    color: #999;
+    font-weight: bold;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#header a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+#header a:hover {
+    color: #fff;
+}
+
+/* Navigation */
+#header ul#nav, #header ul#nav * {
+    z-index: 20;
+}
+
+#header ul#nav {
+    border: 0 none;
+    width: auto;
+    list-style: none;
+    padding: 0;
+    float: left;
+    margin: 0 auto;
+    height: 35px;
+    text-align: center;
+}
+
+#header ul#nav li {
+    margin: 0;
+    border: 0 none;
+    float: left;
+    display: inline;
+    list-style: none;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 40px 0 0;
+}
+
+#header ul#nav li#home-link {
+    padding: 0 40px 0 20px;
+}
+
+#header ul#nav ul {
+    margin: 0;
+    border: 0 none;
+    padding: 0;
+    width: 110px;
+    list-style: none;
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    text-align: left;
+}
+
+#header ul#nav ul li {
+    width: 110px;
+    float: left; /*For IE 7 lack of compliance*/
+    display: inline-block !important;
+    position: relative;
+    top: 0;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    background: url(../image/btn3.jpg) no-repeat;
+}
+
+/* Root Menu */
+#header ul#nav a {
+    float: none !important;
+    display: block;
+    height: auto !important;
+    padding: 0 10px;
+}
+
+#header ul#nav li.active a {
+    color: #ddd;
+}
+
+#header ul#nav li.active a:hover {
+    color: #fff;
+}
+
+/* Root Menu Hover Persistence */
+#header ul#nav a:hover,
+#header ul#nav li:hover a,
+#header ul#nav li.iehover a {
+    color: #fff;
+    border: double #CCCCFF;
+}
+
+/* 2nd Menu */
+#header ul#nav li:hover li a,
+#header ul#nav li.iehover li a {
+    text-transform: none;
+    padding: 0 15px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 30px;
+    color: #999;
+}
+
+/* Do Not Move - Must Come Before display:block for Gecko */
+#header ul#nav li:hover ul ul,
+#header ul#nav li:hover ul ul ul,
+#header ul#nav li.iehover ul ul,
+#header ul#nav li.iehover ul ul ul,
+#header ul#nav li:hover ul,
+#header ul#nav ul li:hover ul,
+#header ul#nav ul ul li:hover ul,
+#header ul#nav li.iehover ul,
+#header ul#nav ul li.iehover ul,
+#header ul#nav ul ul li.iehover ul {
+    display: block;
+}
+
 label {
     font-family: Arial, sans-serif;
     font-size: 100%;
@@ -89,9 +214,10 @@ label {
 /************** #content styles ***************/
 
 #content {
+    background-color: #C6DBFF;
     font-size: 80%;
     height: 100%;
-    margin: 5px 0;
+    padding: 10px 10px 0;
     overflow: hidden;
 }
 
@@ -101,7 +227,7 @@ label {
 }
 
 #content .message-block p {
-    margin: 10px 0 15px ;
+    margin: 10px 0 15px;
 }
 
 #content .message-block p.success {
@@ -114,12 +240,12 @@ label {
 
 div.left-content {
     float: left;
-    width: 465px;
+    width: 49.5% !important;
 }
 
 div.right-content {
     float: right;
-    width: 465px;
+    width: 49.5% !important;
 }
 
 #content h3 {
@@ -167,6 +293,7 @@ div.right-content {
 /************* Footer ***************/
 
 #siteInfo {
+    background: url(../image/green_bg.jpg) repeat-y;
     border: 1px solid #CCCCCC;
     clear: both;
     color: #CCCCCC;
