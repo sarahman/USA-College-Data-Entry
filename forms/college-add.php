@@ -5,28 +5,28 @@
     <fieldset>
 
         <legend class="bLight">College Details</legend>
-        <?php echo getFormError($errorMessage, 'collegeEntryError') ?>
+        <?php echo getFormErrorMessage($errorMessage, 'collegeEntryError') ?>
 
         <p>
             <label for="name">College Name</label>
             <input type="text" name="name" size="50" tabindex="2" id='name'
                    value="<?php echo getVariableValue($_POST, 'name') ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'name') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'name') ?>
         </p>
         <p>
             <label for="city">City</label>
             <input type="text" name="city" size="50" tabindex="2" id="city"
                    value="<?php echo getVariableValue($_POST, 'city') ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'city') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'city') ?>
         </p>
         <p>
             <label for="state">State</label>
             <input type="text" name="state" size="50" tabindex="2" id='state'
                    value="<?php echo getVariableValue($_POST, 'state') ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'state') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'state') ?>
         </p>
         <p>
             <label for="college_type">College Type</label>
@@ -40,21 +40,21 @@
             <?php endforeach; endif ?>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'college_type') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'college_type') ?>
         </p>
         <p>
             <label for="school_logo_link">School Logo Link</label>
             <input type="text" name="school_logo_link" id='school_logo_link' size="50" tabindex="2"
                    value="<?php echo getVariableValue($_POST, 'school_logo_link') ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'school_logo_link') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'school_logo_link') ?>
         </p>
         <p>
             <label for="athletic_logo_link">Athletic Logo Link</label>
             <input type="text" name="athletic_logo_link" id='athletic_logo_link' size="50" tabindex="2"
                    value="<?php echo empty($_POST['athletic_logo_link']) ? '' : $_POST['athletic_logo_link'] ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'athletic_logo_link') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'athletic_logo_link') ?>
         </p>
         <p>
             <label for="division">Division</label>
@@ -68,7 +68,7 @@
             <?php endforeach; endif ?>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'college_type') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'division') ?>
         </p>
         <p>
             <label for="weather_rating">Weather Rating</label>
@@ -82,21 +82,21 @@
             <?php endforeach; endif ?>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'college_type') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'weather_rating') ?>
         </p>
         <p>
             <label for="in_state_tuition_fee">In-State tuition Fees</label>
             <input type="text" name="in_state_tuition_fee" size="50" id='in_state_tuition_fee' tabindex="2"
                    value="<?php echo getVariableValue($_POST, 'in_state_tuition_fee') ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'in_state_tuition_fee') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'in_state_tuition_fee') ?>
         </p>
         <p>
             <label for="out_state_tuition_fee">Out-State tuition Fees</label>
             <input type="text" name="out_state_tuition_fee" id='out_state_tuition_fee' size="50" tabindex="2"
                    value="<?php echo getVariableValue($_POST, 'out_state_tuition_fee') ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'out_state_tuition_fee') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'out_state_tuition_fee') ?>
         </p>
         <div class="submit-clear">
             <input type="submit" value="Add" tabindex="37" name="addCollege" />

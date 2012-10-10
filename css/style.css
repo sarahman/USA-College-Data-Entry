@@ -271,8 +271,13 @@ div.right-content {
 }
 
 #content form span.error {
-    text-align: center;
     font-size: 16px;
+    text-align: center;
+}
+
+#content form .errorMsg,
+#content form select {
+    margin-left: 2px;
 }
 
 #content form select {
@@ -288,6 +293,10 @@ div.right-content {
 #content form .submit-clear {
     margin: 0 auto;
     width: 120px;
+}
+
+#content form .submit-clear.padded {
+    padding: 20px 0;
 }
 
 /************* Footer ***************/

@@ -5,7 +5,7 @@
     <fieldset>
 
         <legend class="bLight">Student Enrollment</legend>
-        <?php echo getFormError($errorMessage, 'studentEnrollmentError') ?>
+        <?php echo getFormErrorMessage($errorMessage, 'studentEnrollmentError') ?>
 
         <p>
             <label for="college_id2">College Name</label>
@@ -20,7 +20,7 @@
                 <?php endforeach; endif ?>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'college_id2') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'college_id2') ?>
         </p>
         <p>
             <label for="semester">Semester</label>
@@ -40,7 +40,7 @@
                     Spring</option>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'semester') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'semester') ?>
         </p>
         <p>
             <label for="year">Year</label>
@@ -53,14 +53,14 @@
                 <?php endfor ?>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'year') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'year') ?>
         </p>
         <p>
             <label for="no_of_students">No. of Students</label>
             <input type="text" name="no_of_students" id='no_of_students' size="50" tabindex="2"
                    value="<?php echo getVariableValue($_POST, 'no_of_students') ?>" />
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'no_of_students') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'no_of_students') ?>
         </p>
         <div class="submit-clear">
             <input type="submit" value="Add" tabindex="37" name="addEnrollment" />

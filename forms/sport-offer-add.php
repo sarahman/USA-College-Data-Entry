@@ -5,7 +5,7 @@
     <fieldset>
 
         <legend class="bLight">College Sport Details</legend>
-        <?php echo getFormError($errorMessage, 'collegeSportError') ?>
+        <?php echo getFormErrorMessage($errorMessage, 'collegeSportError') ?>
 
         <p>
             <label for="college_id3">College Name</label>
@@ -20,7 +20,7 @@
                 <?php endforeach; endif ?>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'college_id3') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'college_id3') ?>
         </p>
         <p>
             <label for="sport_name">Sport Name</label>
@@ -34,7 +34,7 @@
                 <?php endforeach; endif ?>
             </select>
             <span class="stars">*</span>
-            <?php echo getErrorMessage($errorMessage, 'sport_name') ?>
+            <?php echo getFieldErrorMessage($errorMessage, 'sport_name') ?>
         </p>
         <div class="submit-clear">
             <input type="submit" value="Add" tabindex="37" name="addSportOffer" />
