@@ -11,6 +11,11 @@ class CRUDOperation
             '{$data['weather_rating']}', '{$data['in_state_tuition_fee']}', '{$data['out_state_tuition_fee']}')";
         $db->query($query);
     }
+    public static function insertCollegeType(ezSQL_mysql $db, $data)
+    {
+        $query = "INSERT INTO college_types (college_type) VALUES ('{$data['college_type']}')";
+        $db->query($query);
+    }
 
     public static function insertMajor(ezSQL_mysql $db, $data)
     {

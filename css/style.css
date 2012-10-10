@@ -240,11 +240,14 @@ label {
 
 div.left-content {
     float: left;
-    width: 49.5% !important;
 }
 
 div.right-content {
     float: right;
+}
+
+div.left-content,
+div.right-content {
     width: 49.5% !important;
 }
 
@@ -256,7 +259,12 @@ div.right-content {
 #content form {
     background-color: #C6FFFF;
     padding: 5px;
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
+}
+
+#content form table.centered {
+    margin: 0 auto;
+    width: 60%;
 }
 
 #content form span.stars {

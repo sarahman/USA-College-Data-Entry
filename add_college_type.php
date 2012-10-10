@@ -1,43 +1,50 @@
 <?php
 include_once 'connection.php';
+include_once 'functions.php';
+include_once 'CRUDOperation.php';
 
 $db = getConnection();
+$messageData = $errorMessage = array();
 if (!empty ($_POST)) {
     include_once 'Validation.php';
     $errorMessage = Validation::validateCollegeTypeEntryForm($db, $_POST);
-    if($errorMessage === true) {
-        $query = "INSERT INTO college_types (college_type)
-            VALUES ('{$_POST['college_type']}')";
-        $db->query($query);
-        unset ($_POST);
+    if ($errorMessage === true) {
+        CRUDOperation::insertCollegeType($db, $_POST);
+        unset($_POST);
+        $messageData = getSuccessMessageData("A new college is successfully inserted.");
+    } else {
+        $messageData = getFailureMessageData("An error occurred while inserting a college.");
     }
 }
-include_once 'header.php'
-?>
+include_once 'header.php' ?>
 <div id="content">
+
+    <?php echo getNotificationMessage($messageData) ?>
+
     <div class="feature">
         <form action="" method="POST">
 
             <fieldset>
-                <legend class="bLight">Your Details</legend>
-                <table width="100%" cellpadding="0" cellspacing="2" border="0">
+                <legend class="bLight">College Type Details</legend>
+                <table class="centered" cellpadding="0" cellspacing="2" border="0">
                     <tbody>
                         <tr>
                             <td><label for="college_type">College Type</label></td>
                             <td>
                                 <input type="text" name="college_type" id='college_type' size="50" tabindex="2"
-                                       value="<?php echo empty($_POST['college_type']) ? '' : $_POST['college_type'] ?>"/>
-                                &nbsp;<span class="stars">*</span>
-                                <?php echo empty ($errorMessage['college_type']) ? '' : $errorMessage['college_type'] ?>
+                                       value="<?php echo getVariableValue($_POST, 'college_type') ?>" />
+                                <span class="stars">*</span>
+                                <?php echo getFieldErrorMessage($errorMessage, 'college_type') ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </fieldset>
 
-            <div align="center" style="padding: 25px 0 25px 0">
-                <input type="submit" value="Add" tabindex="37" /><input type="reset" value="Clear" tabindex="38" />
-            </div>
+                <div class="submit-clear padded">
+                    <input type="submit" value="Add" tabindex="37" />
+                    <input type="reset" value="Clear" tabindex="38" />
+                </div>
+            </fieldset>
         </form>
         <?php
         $query = "SELECT * FROM college_types";
@@ -53,10 +60,11 @@ include_once 'header.php'
             </tr>";
             $count = 0;
             foreach ($results as $college_type) {
-                echo ($count % $columnGroup) ? '': '<tr>';
+                echo ($count % $columnGroup) ? '' : '<tr>';
                 echo "<td>{$college_type->college_type}</td>";
-                echo (++$count % $columnGroup) ? '': '<tr>';
+                echo (++$count % $columnGroup) ? '' : '</tr>';
             }
+            echo (++$count % $columnGroup) ? '' : '</tr>';
             echo '</table>';
         }
         ?>
