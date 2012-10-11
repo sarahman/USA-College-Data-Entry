@@ -1,42 +1,49 @@
 <?php
 include_once 'connection.php';
+include_once 'functions.php';
+include_once 'CRUDOperation.php';
 
 $db = getConnection();
+$messageData = $errorMessage = array();
 if (!empty ($_POST)) {
     include_once 'Validation.php';
-    $validationResponse = Validation::validateWeatherRatingEntryForm($db, $_POST);
-    if($validationResponse === true) {
+    $errorMessage = Validation::validateWeatherRatingEntryForm($db, $_POST);
+    if ($errorMessage === true) {
         $query = "INSERT INTO weather_ratings (type)
             VALUES ('{$_POST['type']}')";
         $db->query($query);
-
         unset ($_POST);
+        $messageData = getSuccessMessageData("A new weather type is successfully inserted.");
+    } else {
+        $messageData = getFailureMessageData("An error occurred while inserting a weather type.");
     }
 }
-include_once 'header.php'
-?>
+include_once 'header.php' ?>
 <div id="content">
+
+    <?php echo getNotificationMessage($messageData) ?>
+
     <div class="feature">
         <form action="" method="POST">
 
             <fieldset>
-                <legend class="bLight">Your Details</legend>
-                <table width="100%" cellpadding="0" cellspacing="2" border="0">
+                <legend class="bLight">Weather Details</legend>
+                <table class="centered" cellpadding="0" cellspacing="2" border="0">
                     <tbody>
                         <tr>
                             <td><label for="type">Weather Type</label></td>
                             <td>
                                 <input type="text" name="type" id='type' size="50" tabindex="2"
-                                       value="<?php echo empty($_POST['type']) ? '' : $_POST['type'] ?>"/>
-                                &nbsp;<span class="stars">*</span>
-                                <?php echo empty ($validationResponse['type']) ? '' : $validationResponse['type'] ?>
+                                       value="<?php echo getVariableValue($_POST, 'type') ?>" />
+                                <span class="stars">*</span>
+                                <?php echo getFieldErrorMessage($errorMessage, 'type') ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </fieldset>
 
-            <div align="center" style="padding: 25px 0">
+            <div class="submit-clear padded">
                 <input type="submit" value="Add" tabindex="37" />
                 <input type="reset" value="Clear" tabindex="38" />
             </div>
@@ -44,23 +51,28 @@ include_once 'header.php'
         <?php
         $query = "SELECT * FROM weather_ratings";
         $results = $db->get_results($query);
-        if($results){
-            echo "<table>
+        if ($results) : ?>
+        <table class="cell-centered">
             <tr>
-                <th>Ratings</th>
+            <?php for ($groupColumn = 2, $count = 0; $count < $groupColumn; ++$count ) : ?>
+                <th>Rating</th>
                 <th>Weather Type</th>
-            </tr>";
+            <?php endfor ?>
+            </tr>
+
+            <?php $count = 0;
             foreach ($results as $weather) {
+                echo ($count % $groupColumn) ? '' : "<tr>";
                 echo <<<EOT
-                <tr>
                     <td>{$weather->weather_rating}</td>
                     <td>{$weather->type}</td>
-                </tr>
 EOT;
+                echo (++$count % $groupColumn) ? '' : "</tr>";
             }
-            echo '</table>';
-        }
-        ?>
+            echo (++$count % $groupColumn) ? '' : "</tr>" ?>
+
+        </table>
+        <?php endif ?>
     </div>
 </div>
 <?php include_once 'footer.php' ?>

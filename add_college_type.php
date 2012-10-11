@@ -49,7 +49,7 @@ include_once 'header.php' ?>
         $query = "SELECT * FROM college_types";
         $results = $db->get_results($query);
         if ($results) : ?>
-        <table width='100%'>
+        <table class="cell-centered">
             <tr>
             <?php for ($count = 0, $columnGroup = 4; $count < $columnGroup; ++$count) : ?>
                 <th style='width: 25%'>College Type</th>

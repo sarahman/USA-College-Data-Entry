@@ -267,6 +267,14 @@ div.right-content {
     width: 60%;
 }
 
+#content table.cell-centered {
+    width: 100%;
+}
+
+#content table.cell-centered td {
+    text-align: center;
+}
+
 #content form span.stars {
     padding-left: 2px;
 }
