@@ -46,8 +46,7 @@ include_once 'header.php' ?>
             </fieldset>
         </form>
         <?php
-        $query = "SELECT * FROM college_types";
-        $results = $db->get_results($query);
+        $results = CRUDOperation::selectAllCollegeTypes($db);
         if ($results) : ?>
         <table class="cell-centered">
             <tr>

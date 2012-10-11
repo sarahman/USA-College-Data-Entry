@@ -73,8 +73,7 @@ include_once 'header.php' ?>
         </form>
 
         <?php
-        $query = "SELECT C.name, S.sport_name FROM sports_offers S JOIN colleges C ON S.college_id = c.college_id";
-        $results = $db->get_results($query);
+        $results = CRUDOperation::selectAllSportNamesOfColleges($db);
         if ($results) : ?>
         <table style='100%'>
             <tr>

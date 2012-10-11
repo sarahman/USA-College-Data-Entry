@@ -9,9 +9,7 @@ if (!empty ($_POST)) {
     include_once 'Validation.php';
     $errorMessage = Validation::validateDivisionEntryForm($db, $_POST);
     if ($errorMessage === true) {
-        $query = "INSERT INTO divisions (division)
-            VALUES ('{$_POST['division']}')";
-        $db->query($query);
+        CRUDOperation::insertCollegeDivision($db, $_POST);
         unset ($_POST);
         $messageData = getSuccessMessageData("A new division is successfully inserted.");
     } else {
@@ -49,8 +47,7 @@ include_once 'header.php' ?>
             </div>
         </form>
         <?php
-        $query = "SELECT * FROM divisions";
-        $results = $db->get_results($query);
+        $results = CRUDOperation::selectAllDivisions($db);
         if ($results) : $groupColumn = 5 ?>
         <table width="100%">
             <tr>

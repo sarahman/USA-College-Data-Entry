@@ -21,13 +21,7 @@ class Validation
         if (!empty($data['name']) && !empty($data['city'])
                 && !empty($data['state']) && !empty($data['division'])) {
 
-            $query = "SELECT college_id FROM colleges
-                      WHERE `name`='{$data['name']}'
-                        AND city='{$data['city']}'
-                        AND state='{$data['state']}'
-                        AND division='{$data['division']}'";
-            $result = $db->get_row($query);
-            
+            $result = CRUDOperation::checkCollegeExisted($db, $data);
             if ($result) {
                 $msg['collegeEntryError'] = "{$data['name']} is already inserted.";
             }
@@ -41,9 +35,7 @@ class Validation
         if (empty($data['sport_name_entry'])) {
             return array('sport_name_entry' => 'Enter sport name.');
         } else {
-            $query = "SELECT * FROM sports_names
-                      WHERE sport_name='{$data['sport_name_entry']}'";
-            $result = $db->get_row($query);
+            $result = CRUDOperation::checkSportNameExisted($db, $data);
             return empty($result) ? true : array('sportNameEntryError' => 'This sport name is in the database.');
         }
     }
@@ -57,10 +49,7 @@ class Validation
 
         if (!empty($data['college_id3']) && !empty($data['sport_name'])) {
 
-            $query = "SELECT * FROM sports_offers
-                      WHERE college_id='{$data['college_id3']}'
-                        AND sport_name='{$data['sport_name']}'";
-            $result = $db->get_row($query);
+            $result = CRUDOperation::checkSportOfferExistedInCollege($db, $data);
             empty($result) || $msg['collegeSportError'] = "{$data['sport_name']} is already in that college.";
         }
 
@@ -74,11 +63,7 @@ class Validation
         (!empty($data['subject_name'])) || $msg['subject_name'] = 'Enter a subject name.';
 
         if (!empty($data['college_id']) && !empty($data['subject_name'])) {
-
-            $query = "SELECT * FROM majors
-                      WHERE college_id='{$data['college_id']}'
-                        AND subject_name='{$data['subject_name']}'";
-            $result = $db->get_row($query);
+            $result = CRUDOperation::checkMajorExistedInCollege($db, $data);
             empty($result) || $msg['collegeMajorError'] = "{$data['subject_name']} is already in that college.";
         }
 
@@ -96,11 +81,7 @@ class Validation
 
         if (!empty($data['college_id2']) && !empty($data['semester']) && !empty($data['year'])) {
 
-            $query = "SELECT * FROM student_enrollments
-                      WHERE college_id='{$data['college_id2']}'
-                        AND semester='{$data['semester']}'
-                        AND `year`='{$data['year']}'";
-            $result = $db->get_row($query);
+            $result = CRUDOperation::checkEnrollmentExistedInParticularSemesterInACollege($db, $data);
             empty($result) || $msg['studentEnrollmentError'] = "The no of students in the
                     {$data['semester']}-{$data['year']} semester of that <strong>college</strong> is already inserted.";
         }
@@ -114,8 +95,8 @@ class Validation
         if (empty ($data['type'])) {
             $msg['type'] = 'Enter weather type';
         } else {
-            $query = "SELECT * FROM weather_ratings WHERE `type`='{$data['type']}'";
-            $result = $db->get_row($query);
+
+            $result = CRUDOperation::checkWeatherTypeExisted($db, $data);
             if ($result) {
                 $msg['type'] = 'This weather type is in the database.';
             } else {
@@ -130,8 +111,7 @@ class Validation
         if (empty ($data['college_type'])) {
             return array('college_type' => 'Enter a college type.');
         } else {
-            $query = "SELECT * FROM college_types WHERE college_type='{$data['college_type']}'";
-            $result = $db->get_row($query);
+            $result = CRUDOperation::checkCollegeTypeExisted($db, $data);
             return empty ($result) ? true : array('college_type' => 'This college type is in the database.');
         }
     }
@@ -141,8 +121,7 @@ class Validation
         if (empty ($data['division'])) {
             return array('division' => 'Enter a division.');
         } else {
-            $query = "SELECT * FROM divisions WHERE division='{$data['division']}'";
-            $result = $db->get_row($query);
+            $result = CRUDOperation::checkCollegeDivisionExisted($db, $data);
             return empty ($result) ? true : array('division' => 'This division is in the database.');
         }
     }

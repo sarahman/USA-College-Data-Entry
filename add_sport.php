@@ -49,8 +49,7 @@ include_once 'header.php' ?>
         </form>
 
         <?php
-        $query = "SELECT * FROM sports_names";
-        $results = $db->get_results($query);
+        $results = CRUDOperation::selectAllSportNames($db);
         if ($results) : $groupColumn = 5 ?>
         <table>
             <tr>

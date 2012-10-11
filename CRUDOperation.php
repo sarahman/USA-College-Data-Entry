@@ -11,6 +11,7 @@ class CRUDOperation
             '{$data['weather_rating']}', '{$data['in_state_tuition_fee']}', '{$data['out_state_tuition_fee']}')";
         $db->query($query);
     }
+
     public static function insertCollegeType(ezSQL_mysql $db, $data)
     {
         $query = "INSERT INTO college_types (college_type) VALUES ('{$data['college_type']}')";
@@ -45,6 +46,18 @@ class CRUDOperation
         $db->query($query);
     }
 
+    public static function insertCollegeDivision(ezSQL_mysql $db, $data)
+    {
+        $query = "INSERT INTO divisions (division) VALUES ('{$data['division']}')";
+        $db->query($query);
+    }
+
+    public static function insertWeatherType(ezSQL_mysql $db, $data)
+    {
+        $query = "INSERT INTO weather_ratings (`type`) VALUES ('{$data['type']}')";
+        $db->query($query);
+    }
+
     public static function selectAllCollegeTypes(ezSQL_mysql $db)
     {
         $query = "SELECT * FROM college_types";
@@ -69,9 +82,76 @@ class CRUDOperation
         return $db->get_results($query);
     }
 
+    public static function selectAllSportNamesOfColleges(ezSQL_mysql $db)
+    {
+        $query = "SELECT C.name, S.sport_name FROM sports_offers S JOIN colleges C ON S.college_id = c.college_id";
+        return $db->get_results($query);
+    }
+
     public static function selectIdNameOfCollege(ezSQL_mysql $db)
     {
         $query = "SELECT college_id, name FROM colleges";
         return $db->get_results($query);
+    }
+
+    public static function checkCollegeExisted(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT college_id FROM colleges
+                  WHERE `name`='{$data['name']}'
+                    AND city='{$data['city']}'
+                    AND state='{$data['state']}'
+                    AND division='{$data['division']}'";
+
+        return $db->get_row($query);
+    }
+
+    public static function checkSportNameExisted(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT * FROM sports_names
+                  WHERE sport_name='{$data['sport_name_entry']}'";
+        return $db->get_row($query);
+    }
+
+    public static function checkSportOfferExistedInCollege(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT * FROM sports_offers
+                  WHERE college_id='{$data['college_id3']}'
+                    AND sport_name='{$data['sport_name']}'";
+        return $db->get_row($query);
+    }
+
+    public static function checkMajorExistedInCollege(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT * FROM majors
+                  WHERE college_id='{$data['college_id']}'
+                    AND subject_name='{$data['subject_name']}'";
+        return $db->get_row($query);
+    }
+
+    public static function checkEnrollmentExistedInParticularSemesterInACollege(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT * FROM student_enrollments
+                  WHERE college_id='{$data['college_id2']}'
+                    AND semester='{$data['semester']}'
+                    AND `year`='{$data['year']}'";
+        return $db->get_row($query);
+    }
+
+    public static function checkWeatherTypeExisted(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT * FROM weather_ratings WHERE `type`='{$data['type']}'";
+        return $db->get_row($query);
+    }
+
+    public static function checkCollegeTypeExisted(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT * FROM college_types WHERE college_type='{$data['college_type']}'";
+        return $db->get_row($query);
+    }
+
+    public static function checkCollegeDivisionExisted(ezSQL_mysql $db, $data)
+    {
+        $query = "SELECT * FROM divisions WHERE division='{$data['division']}'";
+        return $db->get_row($query);
     }
 }

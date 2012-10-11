@@ -9,9 +9,7 @@ if (!empty ($_POST)) {
     include_once 'Validation.php';
     $errorMessage = Validation::validateWeatherRatingEntryForm($db, $_POST);
     if ($errorMessage === true) {
-        $query = "INSERT INTO weather_ratings (type)
-            VALUES ('{$_POST['type']}')";
-        $db->query($query);
+        CRUDOperation::insertWeatherType($db, $_POST);
         unset ($_POST);
         $messageData = getSuccessMessageData("A new weather type is successfully inserted.");
     } else {
@@ -49,8 +47,7 @@ include_once 'header.php' ?>
             </div>
         </form>
         <?php
-        $query = "SELECT * FROM weather_ratings";
-        $results = $db->get_results($query);
+        $results = CRUDOperation::selectAllWeatherRatings($db);
         if ($results) : ?>
         <table class="cell-centered">
             <tr>
