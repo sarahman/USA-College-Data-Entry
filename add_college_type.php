@@ -11,9 +11,9 @@ if (!empty ($_POST)) {
     if ($errorMessage === true) {
         CRUDOperation::insertCollegeType($db, $_POST);
         unset($_POST);
-        $messageData = getSuccessMessageData("A new college is successfully inserted.");
+        $messageData = getSuccessMessageData("A new college type is successfully inserted.");
     } else {
-        $messageData = getFailureMessageData("An error occurred while inserting a college.");
+        $messageData = getFailureMessageData("An error occurred while inserting a college type.");
     }
 }
 include_once 'header.php' ?>
@@ -23,7 +23,6 @@ include_once 'header.php' ?>
 
     <div class="feature">
         <form action="" method="POST">
-
             <fieldset>
                 <legend class="bLight">College Type Details</legend>
                 <table class="centered" cellpadding="0" cellspacing="2" border="0">
@@ -49,25 +48,23 @@ include_once 'header.php' ?>
         <?php
         $query = "SELECT * FROM college_types";
         $results = $db->get_results($query);
-        if($results) {
-            $columnGroup = 4;
-            echo "<table width='100%'>
+        if ($results) : ?>
+        <table width='100%'>
             <tr>
+            <?php for ($count = 0, $columnGroup = 4; $count < $columnGroup; ++$count) : ?>
                 <th style='width: 25%'>College Type</th>
-                <th style='width: 25%'>College Type</th>
-                <th style='width: 25%'>College Type</th>
-                <th style='width: 25%'>College Type</th>
-            </tr>";
-            $count = 0;
+            <?php endfor ?>
+            </tr>
+
+            <?php $count = 0;
             foreach ($results as $college_type) {
                 echo ($count % $columnGroup) ? '' : '<tr>';
                 echo "<td>{$college_type->college_type}</td>";
                 echo (++$count % $columnGroup) ? '' : '</tr>';
             }
-            echo (++$count % $columnGroup) ? '' : '</tr>';
-            echo '</table>';
-        }
-        ?>
+            echo (++$count % $columnGroup) ? '' : '</tr>'; ?>
+        </table>
+        <?php endif ?>
     </div>
 </div>
 <?php include_once 'footer.php' ?>
