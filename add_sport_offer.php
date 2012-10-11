@@ -64,12 +64,13 @@ include_once 'header.php' ?>
                         </tr>
                     </tbody>
                 </table>
-            </fieldset>
 
-            <div class="submit-clear padded">
-                <input type="submit" value="Add" tabindex="37" />
-                <input type="reset" value="Clear" tabindex="38" />
-            </div>
+                <div class="submit-clear padded">
+                    <input type="submit" value="Add" tabindex="37" />
+                    <input type="reset" value="Clear" tabindex="38" />
+                    <button tabindex="39" onclick="window.location='index.php'; return false">Back</button>
+                </div>
+            </fieldset>
         </form>
 
         <?php
@@ -85,7 +86,8 @@ include_once 'header.php' ?>
             <?php $count = 0;
             foreach ($results as $sportOffer) {
                 echo ($count % $columnGroup) ? '' : "<tr>";
-                echo "<td>{$sportOffer->name}</td><td>{$sportOffer->sport_name}</td>";
+                echo '<td>' . ucfirst($sportOffer->name) . '</td>';
+                echo '<td>' . ucfirst($sportOffer->sport_name) . '</td>';
                 echo (++$count % $columnGroup) ? '' : "</tr>";
             }
             echo (++$count % $columnGroup) ? '' : "</tr>" ?>

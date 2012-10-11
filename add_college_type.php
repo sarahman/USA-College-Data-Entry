@@ -42,6 +42,7 @@ include_once 'header.php' ?>
                 <div class="submit-clear padded">
                     <input type="submit" value="Add" tabindex="37" />
                     <input type="reset" value="Clear" tabindex="38" />
+                    <button tabindex="39" onclick="window.location='index.php'; return false">Back</button>
                 </div>
             </fieldset>
         </form>
