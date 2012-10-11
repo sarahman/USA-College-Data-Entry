@@ -1,42 +1,48 @@
 <?php
 include_once 'connection.php';
+include_once 'functions.php';
+include_once 'CRUDOperation.php';
 
 $db = getConnection();
+$messageData = $errorMessage = array();
 if (!empty ($_POST)) {
     include_once 'Validation.php';
     $errorMessage = Validation::validateSportNameEntryForm($db, $_POST);
-    if($errorMessage === true) {
-        $query = "INSERT INTO sports_names (sport_name)
-            VALUES ('{$_POST['sport_name']}')";
-        $db->query($query);
+    if ($errorMessage === true) {
+        CRUDOperation::insertSportName($db, $_POST);
         unset($_POST);
+        $messageData = getSuccessMessageData("A new sport name is successfully inserted.");
+    } else {
+        $messageData = getFailureMessageData("An error occurred while inserting sport name.");
     }
 }
 
-include_once 'header.php'
-?>
+include_once 'header.php' ?>
 <div id="content">
+
+    <?php echo getNotificationMessage($messageData) ?>
+
     <div class="feature">
         <form action="" method="POST">
 
             <fieldset>
-                <legend class="bLight">Your Details</legend>
-                <table width="100%" cellpadding="0" cellspacing="2" border="0">
+                <legend class="bLight">Sport Name Details</legend>
+                <table class="centered" cellpadding="0" cellspacing="2" border="0">
                     <tbody>
                         <tr>
-                            <td><label for="sport_name">Sport Name</label></td>
+                            <td><label for="sport_name_entry">Sport Name</label></td>
                             <td>
-                                <input type="text" name="sport_name" id='sport_name' size="50" tabindex="2"
-                                       value="<?php echo empty($_POST['sport_name']) ? '' : $_POST['sport_name'] ?>"/>
-                                &nbsp;<span class="stars">*</span>
-                                <?php echo empty ($errorMessage['sport_name']) ? '' : $errorMessage['sport_name'] ?>
+                                <input type="text" name="sport_name_entry" id='sport_name_entry' size="50" tabindex="2"
+                                       value="<?php echo getVariableValue($_POST, 'sport_name_entry') ?>" />
+                                <span class="stars">*</span>
+                                <?php echo getFieldErrorMessage($errorMessage, 'sport_name_entry') ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </fieldset>
 
-            <div align="center" style="padding: 25px 0">
+            <div class="submit-clear padded">
                 <input type="submit" value="Add" tabindex="37" />
                 <input type="reset" value="Clear" tabindex="38" />
             </div>
@@ -45,30 +51,22 @@ include_once 'header.php'
         <?php
         $query = "SELECT * FROM sports_names";
         $results = $db->get_results($query);
-        if($results){
-            echo "<table>
+        if ($results) : $groupColumn = 5 ?>
+        <table>
             <tr>
-                <th colspan='5'>Sports Name</th>
-            </tr>";
-            $count = 1;
+                <th colspan='<?php echo $groupColumn ?>'>Sports Name</th>
+            </tr>
+            <?php $count = 0;
             foreach ($results as $sportName) {
-                if($count == 1) {
-                    echo "\n<tr>";
-                }
+                echo ($count % $groupColumn) ? '' : "<tr>";
                 echo "<td>{$sportName->sport_name}</td>";
-                if ($count == 5) {
-                    echo '</tr>';
-                    $count = 0;
-                }
-                ++$count;
+                echo (++$count % $groupColumn) ? '' : "</tr>";
             }
-            if($count != 1 && $count != 5) {
-                echo '</tr>';
-            }
-            echo '</table>';
-        }
-        ?>
-        
+            echo (++$count % $groupColumn) ? '' : "</tr>" ?>
+
+        </table>
+        <?php endif ?>
+
     </div>
 </div>
 <?php include_once 'footer.php' ?>
